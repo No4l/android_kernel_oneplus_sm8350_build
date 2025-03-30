@@ -32,6 +32,10 @@ jobs:
       run: |
         cd sm8350
         git submodule add https://github.com/tiann/KernelSU.git
+        cd KernelSU
+        git fetch --tags  # 获取子模块仓库的所有标签
+        git checkout v0.9.5  # 将 `<your_desired_tag>` 替换为你想要使用的 KernelSU 的标签
+        cd ..
         git submodule update --init --recursive
         git apply ../patches/ksu.patch
 
