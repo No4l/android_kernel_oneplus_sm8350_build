@@ -42,7 +42,7 @@ export SUBARCH="$arch"
 export CROSS_COMPILE="aarch64-linux-gnu-"
 
 msg "Generating defconfig from \`make $defconfig\`..."
-if ! make O=out $arch_opts "$defconfig"; then
+if ! make O=out ARCH=${arch} SUBARCH=${arch} "$defconfig"; then
     err "Failed generating .config, make sure it is actually available in arch/${arch}/configs/ and is a valid defconfig file"
     exit 2
 fi
