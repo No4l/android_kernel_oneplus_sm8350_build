@@ -35,14 +35,10 @@ else
     defconfig=$defconfig_original
 fi
 
-arch_opts="CC=clang ARCH=${arch} SUBARCH=${arch}"
-export ARCH="$arch"
-export SUBARCH="$arch"
-
-export CROSS_COMPILE="aarch64-linux-gnu-"
+arch_opts="CC=clang ARCH=${arch} SUBARCH=${arch} CROSS_COMPILE=aarch64-linux-gnu- AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip"
 
 msg "Generating defconfig from \`make $defconfig\`..."
-if ! make O=out ARCH=${arch} SUBARCH=${arch} "$defconfig"; then
+if ! make O=out $arch_opts "$defconfig"; then
     err "Failed generating .config, make sure it is actually available in arch/${arch}/configs/ and is a valid defconfig file"
     exit 2
 fi
