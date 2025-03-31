@@ -36,7 +36,7 @@ jobs:
         sudo apt upgrade && sudo apt update
         sudo apt install libdebuginfod-dev
         export PATH="$(pwd)/toolchain/bin:${PATH}"
-        cp patches/build.sh sm8350/build.sh && cp patches/mkdtboimg.py sm8359/mkdtboimg.py && cd sm8350 && bash build.sh
+        cp patches/build.sh sm8350/build.sh && cp patches/mkdtboimg.py sm8350/mkdtboimg.py && cd sm8350 && bash build.sh
         git log --no-decorate --oneline -n 100 > out/ak3/ChangeLog.txt
 
     - name: Upload final output
