@@ -33,6 +33,7 @@ jobs:
 
     - name: Android kernel build
       run: |
+        sudo apt upgrade && sudo apt update
         sudo apt install libdebuginfod-dev
         export PATH="$(pwd)/toolchain/bin:${PATH}"
         cp patches/build.sh sm8350/build.sh && cp patches/mkdtboimg.py sm8359/mkdtboimg.py && cd sm8350 && bash build.sh
