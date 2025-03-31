@@ -35,11 +35,11 @@ else
     defconfig=$defconfig_original
 fi
 
-arch_opts="ARCH=${arch} SUBARCH=${arch}"
+arch_opts="CC=clang ARCH=${arch} SUBARCH=${arch}"
 export ARCH="$arch"
 export SUBARCH="$arch"
 
-export CROSS_COMPILE="aarch64-elf-"
+export CROSS_COMPILE="aarch64-linux-gnu-"
 
 msg "Generating defconfig from \`make $defconfig\`..."
 if ! make O=out $arch_opts "$defconfig"; then
