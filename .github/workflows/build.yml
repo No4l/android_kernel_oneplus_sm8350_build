@@ -10,8 +10,8 @@ jobs:
     - name: Checkout kernel source
       uses: actions/checkout@v4
       with:
-        repository: No4l/android_kernel_oneplus_sm8350
-        ref: lineage-22.1
+        repository: LineageOS/android_kernel_oneplus_sm8350
+        ref: lineage-21
         path: sm8350
         fetch-depth: 100
 
@@ -26,7 +26,7 @@ jobs:
       run: |
         sudo apt install libdebuginfod-dev
         export PATH="$(pwd)/toolchain/bin:${PATH}"
-        cd sm8350 && bash build.sh
+        cp build.sh sm8350/build.sh && cp mkdtboimg.py sm8359/mkdtboimg.py && cd sm8350 && bash build.sh
         git log --no-decorate --oneline -n 100 > out/ak3/ChangeLog.txt
 
     - name: Upload final output
