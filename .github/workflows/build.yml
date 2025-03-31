@@ -7,10 +7,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout patches
+      uses: actions/checkout@v4
+      with:
+        ref: build
+        path: patches
     - name: check file
       run: |
-        ls -la $(pwd)
-        cat $(pwd)/build.sh
+        cat patches/build.sh
     
     - name: Checkout kernel source
       uses: actions/checkout@v4
@@ -31,7 +35,7 @@ jobs:
       run: |
         sudo apt install libdebuginfod-dev
         export PATH="$(pwd)/toolchain/bin:${PATH}"
-        cp $(pwd)/build.sh sm8350/build.sh && cp $(pwd)/mkdtboimg.py sm8359/mkdtboimg.py && cd sm8350 && bash build.sh
+        cp patches/build.sh sm8350/build.sh && cp patches/mkdtboimg.py sm8359/mkdtboimg.py && cd sm8350 && bash build.sh
         git log --no-decorate --oneline -n 100 > out/ak3/ChangeLog.txt
 
     - name: Upload final output
